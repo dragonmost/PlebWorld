@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200513235503_AddMaterialTypes.cs" />
+    <Compile Remove="Migrations\20200513235503_AddMaterialTypes.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PlebWorld.Core\PlebWorld.Core.csproj" />
   </ItemGroup>
 

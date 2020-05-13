@@ -4,7 +4,8 @@ using System.Text;
 
 namespace PlebWorld.Database.Models
 {
-	public class ItemType : NamedDBObject
+	public abstract class NamedDBObject : DBObject
 	{
+		public string Name { get; set; }
 	}
 }

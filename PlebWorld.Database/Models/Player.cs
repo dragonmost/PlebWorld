@@ -6,10 +6,8 @@ using System.Text;
 
 namespace PlebWorld.Database.Models
 {
-	public class Player : DBObject
+	public class Player : NamedDBObject
 	{
-		public string Name { get; set; }
-
 		public int BackpackID { get; set; }
 
 		public int ChestID { get; set; }

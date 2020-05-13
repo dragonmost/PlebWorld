@@ -5,10 +5,8 @@ using System.Text;
 
 namespace PlebWorld.Database.Models
 {
-	public class Item : DBObject
+	public class Item : NamedDBObject
 	{
-		public string Name { get; set; }
-		
 		public int ItemTypeID { get; set; }
 
 		public int Count { get; set; }

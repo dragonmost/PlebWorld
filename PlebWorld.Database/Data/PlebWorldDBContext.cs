@@ -15,6 +15,8 @@ namespace PlebWorld.Database.Data
 
 		public DbSet<Inventory> Inventories { get; set; }
 
+		public DbSet<MaterialType> MaterialTypes { get; set; }
+
 		public DbSet<Player> Players { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
