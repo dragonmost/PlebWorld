@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlebWorld.Core", "PlebWorld.Core\PlebWorld.Core.csproj", "{B54704F6-BC4C-4B5D-9409-755E0D07FC40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlebWorld.Server", "PlebWorld.Server\PlebWorld.Server.csproj", "{EDB83A5A-F75A-49FB-99D9-FDF39E61EE71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlebWorld.Server", "PlebWorld.Server\PlebWorld.Server.csproj", "{EDB83A5A-F75A-49FB-99D9-FDF39E61EE71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlebWorld.Database", "PlebWorld.Database\PlebWorld.Database.csproj", "{E691D330-F171-4CD7-9BD7-ABB4A80215E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlebWorld.Database", "PlebWorld.Database\PlebWorld.Database.csproj", "{E691D330-F171-4CD7-9BD7-ABB4A80215E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlebWorld.Web", "PlebWorld.Web\PlebWorld.Web.csproj", "{E44F4DD0-BEF3-477E-A9D5-6D34DA0CCF04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,18 @@ Global
 		{E691D330-F171-4CD7-9BD7-ABB4A80215E1}.Release|x64.Build.0 = Release|Any CPU
 		{E691D330-F171-4CD7-9BD7-ABB4A80215E1}.Release|x86.ActiveCfg = Release|Any CPU
 		{E691D330-F171-4CD7-9BD7-ABB4A80215E1}.Release|x86.Build.0 = Release|Any CPU
+		{E44F4DD0-BEF3-477E-A9D5-6D34DA0CCF04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E44F4DD0-BEF3-477E-A9D5-6D34DA0CCF04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E44F4DD0-BEF3-477E-A9D5-6D34DA0CCF04}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E44F4DD0-BEF3-477E-A9D5-6D34DA0CCF04}.Debug|x64.Build.0 = Debug|Any CPU
+		{E44F4DD0-BEF3-477E-A9D5-6D34DA0CCF04}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E44F4DD0-BEF3-477E-A9D5-6D34DA0CCF04}.Debug|x86.Build.0 = Debug|Any CPU
+		{E44F4DD0-BEF3-477E-A9D5-6D34DA0CCF04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E44F4DD0-BEF3-477E-A9D5-6D34DA0CCF04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E44F4DD0-BEF3-477E-A9D5-6D34DA0CCF04}.Release|x64.ActiveCfg = Release|Any CPU
+		{E44F4DD0-BEF3-477E-A9D5-6D34DA0CCF04}.Release|x64.Build.0 = Release|Any CPU
+		{E44F4DD0-BEF3-477E-A9D5-6D34DA0CCF04}.Release|x86.ActiveCfg = Release|Any CPU
+		{E44F4DD0-BEF3-477E-A9D5-6D34DA0CCF04}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

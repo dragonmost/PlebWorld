@@ -1,0 +1,26 @@
+﻿@page "/"
+@using System.Security.Claims; 
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<h1>Hello, world! Your PlayerID is: @playerID</h1>
+
+Welcome to your new app.
+
+@functions {
+    public string playerID;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+        if (state?.User?.Claims is IEnumerable<Claim> claims)
+        {
+            playerID = state?.User?.Claims?.FirstOrDefault(c => c.Type == "playerID")?.Value ?? "null";
+
+        }
+        else
+        {
+            state.User.AddIdentity(new ClaimsIdentity())
+        }
+    }
+}
