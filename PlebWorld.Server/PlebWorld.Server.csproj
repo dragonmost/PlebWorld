@@ -6,14 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PlebWorld.Core\PlebWorld.Core.csproj" />
+    <ProjectReference Include="..\PlebWorld.Database.LiteDB\PlebWorld.Database.LiteDB.csproj" />
     <ProjectReference Include="..\PlebWorld.Database\PlebWorld.Database.csproj" />
   </ItemGroup>
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PlebWorld.Database.Models
+namespace PlebWorld.Models
 {
 	public class MaterialType : NamedDBObject
 	{

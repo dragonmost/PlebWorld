@@ -1,46 +1,66 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PlebWorld.Database.Data;
-using PlebWorld.Database.Models;
+﻿using PlebWorld.Core.Services;
+using PlebWorld.Database;
+using PlebWorld.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Vildmark.DependencyServices;
 
 namespace PlebWorld.Server
 {
-	public class PlebWorldServerInstance
+	public class PlebWorldServerInstance : INamedDBObjectRegister
 	{
-		private readonly PlebWorldDBContext dbContext;
+		private readonly IDatabase database;
 
-		public PlebWorldServerInstance(PlebWorldDBContext dbContext)
+		public IDependencyService DependencyService { get; }
+
+		public IEnumerable<Player> Players => database.GetCollection<Player>().GetAll();
+
+		public PlebWorldServerInstance(IDependencyService dependencyService, IDatabase database)
 		{
-			this.dbContext = dbContext;
+			DependencyService = dependencyService;
+			this.database = database;
+		}
+
+		public bool RenamePlayer(Player player, string newName)
+		{
+			if (GetPlayer(newName) is { })
+			{
+				return false;
+			}
+
+			player.Name = newName;
+
+			database.GetCollection<Player>().Update(player);
+
+			return true;
 		}
 
 		public Item CreateItem(ItemType itemType, string name, int count = 1)
 		{
-			Item result = dbContext.Items.Add(new Item
+			Item item = new Item
 			{
 				ItemTypeID = itemType.ID,
 				Name = name,
 				Count = count
-			}).Entity;
-			dbContext.SaveChanges();
+			};
 
-			return result;
+			database.GetCollection<Item>().Add(item);
+
+			return item;
 		}
 
 		public void UpdateInventory(Inventory inventory)
 		{
-			dbContext.Inventories.Update(inventory);
-			dbContext.SaveChanges();
+			database.GetCollection<Inventory>().Update(inventory);
 		}
 
 		public bool TryRegisterPlayer(string name, out Player player)
 		{
-			if (dbContext.Players.Any(p => p.Name == name))
+			if (database.GetCollection<Player>().Get(p => p.Name == name) is Player existingPlayer)
 			{
-				player = null;
+				player = existingPlayer;
 				return false;
 			}
 
@@ -51,20 +71,19 @@ namespace PlebWorld.Server
 
 			InitializeInventory(player);
 
-			dbContext.Players.Add(player);
-			dbContext.SaveChanges();
+			database.GetCollection<Player>().Add(player);
 
 			return true;
 		}
 
-		public Player GetPlayer(int id)
+		public Player GetPlayer(Guid id)
 		{
-			return dbContext.Players.Find(id);
+			return database.GetCollection<Player>().Get(id);
 		}
 
 		public Player GetPlayer(string name)
 		{
-			return dbContext.Players.FirstOrDefault(p => p.Name == name);
+			return database.GetCollection<Player>().Get(p => p.Name == name);
 		}
 
 		public Inventory CreateInventory(int slots)
@@ -74,18 +93,14 @@ namespace PlebWorld.Server
 				Slots = slots
 			};
 
-			dbContext.Inventories.Add(inventory);
-			dbContext.SaveChanges();
+			database.GetCollection<Inventory>().Add(inventory);
 
 			return inventory;
 		}
 
-		public Inventory GetInventory(int id)
+		public Inventory GetInventory(Guid id)
 		{
-			return dbContext
-				.Inventories
-				.Include(i => i.Items)
-				.FirstOrDefault(i => i.ID == id);
+			return database.GetCollection<Inventory>().Get(id);
 		}
 
 		private void InitializeInventory(Player player)
@@ -95,6 +110,11 @@ namespace PlebWorld.Server
 
 			player.BackpackID = backpack.ID;
 			player.ChestID = chest.ID;
+		}
+
+		T INamedDBObjectRegister.Register<T>(T value)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

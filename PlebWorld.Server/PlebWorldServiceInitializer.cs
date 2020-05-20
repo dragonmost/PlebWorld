@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PlebWorld.Database.Models
+namespace PlebWorld.Server
 {
-	public class ItemType : NamedDBObject
+	internal static class PlebWorldServiceInitializer
 	{
+
 	}
 }
