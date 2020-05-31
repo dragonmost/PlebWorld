@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LiteDB" Version="5.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PlebWorld.Core\PlebWorld.Core.csproj" />
+    <ProjectReference Include="..\PlebWorld.Database\PlebWorld.Database.csproj" />
   </ItemGroup>
 
 </Project>
