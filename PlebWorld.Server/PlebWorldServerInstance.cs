@@ -1,5 +1,4 @@
-﻿using PlebWorld.Core.Services;
-using PlebWorld.Database;
+﻿using PlebWorld.Database;
 using PlebWorld.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using Vildmark.DependencyServices;
 
 namespace PlebWorld.Server
 {
-	public class PlebWorldServerInstance : INamedDBObjectRegister
+	public class PlebWorldServerInstance
 	{
 		private readonly IDatabase database;
 
@@ -110,11 +109,6 @@ namespace PlebWorld.Server
 
 			player.BackpackID = backpack.ID;
 			player.ChestID = chest.ID;
-		}
-
-		T INamedDBObjectRegister.Register<T>(T value)
-		{
-			throw new NotImplementedException();
 		}
 	}
 }
