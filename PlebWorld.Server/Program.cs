@@ -11,40 +11,23 @@ namespace PlebWorld.Server
 	{
 		static void Main(string[] args)
 		{
-			DependencyService dependencyService = new DependencyService();
-			CascadingDependencyServiceTypeRegistrer registrer = new CascadingDependencyServiceTypeRegistrer(dependencyService, new AttributeDependencyServiceTypeProvider(new AppDomainDependencyServiceAssemblyProvider()));
-			registrer.RegisterServices();
+			InitializeDependencyService();
+			InitializeDatabase();
 
-			IDatabase database = new LiteDBDatabase("plebworld.db");
-
-			dependencyService.Register(database);
-
-			PlebWorldServerInstance instance = dependencyService.CreateInstance<PlebWorldServerInstance>();
-
-			instance.TryRegisterPlayer("Phyyl", out Player phyyl);
-
-			Inventory chest = instance.GetInventory(phyyl.ChestID);
-			chest.Items.Clear();
-			Item spearItem = instance.CreateItem(ItemType.Spear, "Master Pleb Spear", 42069);
-
-			chest.Items.Add(spearItem);
-			instance.UpdateInventory(chest);
-
-			PrintInventory(instance, phyyl);
 
 			Console.ReadLine();
 		}
 
-		static void PrintInventory(PlebWorldServerInstance instance, Player player)
+		private static void InitializeDatabase()
 		{
-			Inventory chest = instance.GetInventory(player.ChestID);
+			IDatabase database = new LiteDBDatabase("plebworld.db");
+			DependencyService.Global.Register(database);
+		}
 
-			Console.WriteLine("Chest items: ");
-
-			foreach (var item in chest.Items)
-			{
-				Console.WriteLine($"  {item.Name} ({item.Count})");
-			}
+		private static void InitializeDependencyService()
+		{
+			CascadingDependencyServiceTypeRegistrer registrer = new CascadingDependencyServiceTypeRegistrer(DependencyService.Global, new AttributeDependencyServiceTypeProvider(new AppDomainDependencyServiceAssemblyProvider()));
+			registrer.RegisterServices();
 		}
 	}
 }
