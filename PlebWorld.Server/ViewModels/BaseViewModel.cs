@@ -9,45 +9,46 @@ namespace PlebWorld.Server.ViewModels
 	internal abstract class BaseViewModel<TModel> : IID
 		where TModel : IID, new()
 	{
-		private readonly IDatabase database;
-		private readonly IDatabaseCollection<TModel> collection;
+		protected IDatabase Database { get; }
+		protected IDatabaseCollection<TModel> Collection { get; }
 
-		private TModel model;
+		protected TModel Model { get; private set; }
 
 		public Guid ID
 		{
-			get => model.ID;
-			set => model.ID = value;
+			get => Model.ID;
+			set => Model.ID = value;
 		}
 
 		protected BaseViewModel(Guid id)
 		{
-			database = DependencyService.Global.Get<IDatabase>();
-			collection = database.GetCollection<TModel>();
+			Database = DependencyService.Global.Get<IDatabase>();
+			Collection = Database.GetCollection<TModel>();
 
-			model = id == Guid.Empty ? collection.Create() : collection.Get(id);
+			Model = id == Guid.Empty ? Collection.Create() : Collection.Get(id);
 		}
 
 		protected void RefreshModel()
 		{
-			model = collection.Get(model.ID);
+			Model = Collection.Get(Model.ID);
 		}
 
 		protected void UpdateModel()
 		{
-			collection.Update(model);
+			Collection.Update(Model);
 		}
 
 		protected void SetValue(Action<TModel> action)
 		{
-			action(model);
+			action(Model);
 			UpdateModel();
+			RefreshModel();
 		}
 
 		protected T GetValue<T>(Func<TModel, T> func)
 		{
 			RefreshModel();
-			return func(model);
+			return func(Model);
 		}
 	}
 }

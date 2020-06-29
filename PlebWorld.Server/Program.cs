@@ -2,6 +2,7 @@
 using PlebWorld.Database.LiteDB;
 using PlebWorld.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Vildmark.DependencyServices;
 
@@ -14,7 +15,12 @@ namespace PlebWorld.Server
 			InitializeDependencyService();
 			InitializeDatabase();
 
+			IGame game = new PlebWorldServer();
 
+			IPlayer[] players = game.Players.GetAll().ToArray();
+
+			Console.WriteLine(players.Length);
+			Console.WriteLine(string.Join(Environment.NewLine, players.Select(p => p.Name)));
 			Console.ReadLine();
 		}
 
